@@ -9,6 +9,13 @@ const (
 	// Some systems (like Fedora 20) only know this path.
 	// Sometimes it's the other way round.
 	dbusPathEtc = "/etc/machine-id"
+
+	// on Docker, there are no files for machine-id, and installing
+	// dbus creates a static machine-id for all containers.
+	// To overcome this problem, we can add a last fallback value
+	// which is the hostname file, which, in Docker is the container
+	// name.
+	hostnamePath = "/etc/hostname"
 )
 
 // machineID returns the uuid specified at `/var/lib/dbus/machine-id` or `/etc/machine-id`.
@@ -21,7 +28,12 @@ func machineID() (string, error) {
 		id, err = readFile(dbusPathEtc)
 	}
 	if err != nil {
-		return "", err
+		// this might be a docker container, use the hostname instead
+		id, err = readFile(hostnamePath)
+		if err != nil {
+			// we tried all fallbacks
+			return "", err
+		}
 	}
 	return trim(string(id)), nil
 }
