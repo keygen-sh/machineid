@@ -13,8 +13,8 @@ const (
 	// on Docker, there are no files for machine-id, and installing
 	// dbus creates a static machine-id for all containers.
 	// To overcome this problem, we can add a last fallback value
-	// which is the hostname file, which, in Docker is the container
-	// name.
+	// which is the hostname file. In docker, the container name
+	// is defined as the hostname.
 	hostnamePath = "/etc/hostname"
 )
 
