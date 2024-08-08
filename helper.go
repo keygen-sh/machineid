@@ -44,3 +44,29 @@ func readFile(filename string) ([]byte, error) {
 func trim(s string) string {
 	return strings.TrimSpace(strings.Trim(s, "\n"))
 }
+
+type getIDFunction func() (string, error)
+
+func getIDFromFile(filePath string) getIDFunction {
+	return func() (string, error) {
+		bytes, err := readFile(filePath)
+		if err != nil {
+			return "", err
+		}
+
+		return string(bytes), nil
+	}
+}
+
+func getFirstValidValue(functions ...getIDFunction) (string, error) {
+	for _, fn := range functions {
+		id, err := fn()
+		if err != nil || id == "" {
+			continue
+		}
+
+		return id, nil
+	}
+
+	return "", errors.New("no machine-id found")
+}
