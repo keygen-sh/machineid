@@ -3,11 +3,13 @@
 // Usage: machineid [options]
 //
 // Options:
-//   --appid    <AppID>    Protect machine id by hashing it together with an app id.
+//
+//	--appid    <AppID>    Protect machine id by hashing it together with an app id.
 //
 // Try:
-//   machineid
-//   machineid --appid MyAppID
+//
+//	machineid
+//	machineid --appid MyAppID
 package main
 
 import (
