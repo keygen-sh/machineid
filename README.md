@@ -24,7 +24,7 @@ go get github.com/keygen-sh/machineid
 You can also add the cli app directly to your `$GOPATH/bin` with
 
 ```bash
-go install github.com/keygen-sh/machineid/cmd/machineid
+go install github.com/keygen-sh/machineid/cmd/machineid@latest
 ```
 
 ## Usage
