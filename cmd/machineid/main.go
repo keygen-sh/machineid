@@ -32,7 +32,7 @@ Try:
 `
 
 func usage() {
-	log.Fatalln(usageStr)
+	log.Fatal(usageStr)
 }
 
 func main() {
