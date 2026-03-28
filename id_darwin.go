@@ -13,7 +13,7 @@ import (
 // If there is an error running the commad an empty string is returned.
 func machineID() (string, error) {
 	buf := &bytes.Buffer{}
-	err := run(buf, os.Stderr, "ioreg", "-rd1", "-c", "IOPlatformExpertDevice")
+	err := run(buf, os.Stderr, "/usr/sbin/ioreg", "-rd1", "-c", "IOPlatformExpertDevice")
 	if err != nil {
 		return "", err
 	}
